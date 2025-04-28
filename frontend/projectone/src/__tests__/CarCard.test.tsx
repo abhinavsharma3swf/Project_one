@@ -1,25 +1,15 @@
 import CarCard from "../components/CarCard.tsx";
 import {render, screen} from "@testing-library/react";
 import {expect} from "vitest";
-
+import {MockCar} from "../CarService.ts";
 
 describe('CardCard', () => {
 
     it('should display the make, model, year, price and isUsed on the page', () => {
 
-        const mockCar = {
-            make: 'Tesla',
-            model: 'Model3',
-            year: 2024,
-            price: 20,
-            isUsed: false
-        }
-
-        render(<CarCard car={mockCar}/>)
-        expect(screen.getByRole('heading',{name: 'Tesla'})).toBeVisible();
-        expect(screen.getByText('No')).toBeVisible();
-
-
+        render(<CarCard car= {MockCar}/>)
+        expect(screen.getByText(MockCar.make)).toBeVisible();
+        expect(screen.getByText(MockCar.isUsed ? "Used" : "New")).toBeVisible();
     });
 
 });

@@ -7,11 +7,11 @@ interface CarCardProps{
 const CarCard = ({car}: CarCardProps ) => {
     return (
         <div>
-        <h1>Tesla</h1>
-            <h2>Model3</h2>
-            <h2> 2024</h2>
-            <h2>20</h2>
-            <h2>No</h2>
+            <h1> {car.make}</h1>
+            <h2>{car.model}</h2>
+            <h2>{car.year}</h2>
+            <h2>{car.price}</h2>
+            <p>{car.isUsed ? 'Used' : 'New'}</p>
         </div>
     );
 };
