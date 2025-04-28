@@ -1,4 +1,5 @@
 import {Car} from "./types.ts";
+import axios, {AxiosResponse} from "axios";
 
 export const MockCar: Car = {
     make: "Tesla",
@@ -7,3 +8,10 @@ export const MockCar: Car = {
     price: 40000,
     isUsed: true
 }
+
+type FetchCars = () => Promise<Car[]>;
+
+export const fetchCars: FetchCars = () => (
+    axios.get('/api/cars')
+        .then((r: AxiosResponse<Car[]>) => r.data)
+)
