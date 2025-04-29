@@ -18,19 +18,23 @@ describe('Car Service', () => {
         
         const expected: Car[] = [
             
-            {make: "Tesla",
+            {
+                id: null,
+                make: "Tesla",
                 model: "Model3",
                 year: 2024,
                 price: 40000,
                 isUsed: true },
 
-            {make: "Kia",
+            {id:1,
+                make: "Kia",
                 model: "Stinger",
                 year: 2018,
                 price: 150000,
                 isUsed: true },
 
-            {make: "BMW",
+            {id:2,
+                make: "BMW",
                 model: "X3",
                 year: 2021,
                 price: 50000,

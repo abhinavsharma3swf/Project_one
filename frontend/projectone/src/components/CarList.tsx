@@ -1,6 +1,5 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Car} from "../types.ts";
-import carCard from "./CarCard.tsx";
 import CarCard from "./CarCard.tsx";
 
 type props = {
@@ -10,21 +9,23 @@ const CarList = ({cars}:props) => {
 
     const [localCar, setLocalCar] = useState(cars)
 
+    useEffect(() => {
+        setLocalCar(cars)
+    }, []);
     return (
         <div>
-            setLocalCar(cars)
-            {cars.map(() => (
+
+            {localCar.map((element, index) => (
                 <CarCard
-                key={cars.id}
-                make={cars.make}
-                model:{cars.model}
-                year:{cars.year}
-                price:{cars.price}
-                isUsed:{cars.isUsed}
-
-
-            )
-            })}
+                key={index}
+                car={element}
+                // make={element.make}
+                // model={element.model}
+                // year={element.year}
+                // price={element.price}
+                // isUsed={element.isUsed}
+                />
+            ))}
         </div>
     );
 };

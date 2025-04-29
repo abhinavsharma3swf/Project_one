@@ -2,6 +2,7 @@ import {Car} from "./types.ts";
 import axios, {AxiosResponse} from "axios";
 
 export const MockCar: Car = {
+    id: null,
     make: "Tesla",
     model: "Model3",
     year: 2024,
