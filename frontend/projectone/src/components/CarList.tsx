@@ -19,11 +19,6 @@ const CarList = ({cars}:props) => {
                 <CarCard
                 key={index}
                 car={element}
-                // make={element.make}
-                // model={element.model}
-                // year={element.year}
-                // price={element.price}
-                // isUsed={element.isUsed}
                 />
             ))}
         </div>

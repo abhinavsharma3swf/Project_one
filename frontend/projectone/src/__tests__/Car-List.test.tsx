@@ -38,8 +38,8 @@ describe('Car List', () => {
                 isUsed: false }
         ]
 
-        const mockFetchCars = vi.spyOn(CarService, 'fetchCars')
-            .mockResolvedValue(mockCars)
+        // const mockFetchCars = vi.spyOn(CarService, 'fetchCars')
+        //     .mockResolvedValue(mockCars)
         render(<CarList cars={mockCars}/>)
         expect(screen.getByText('Tesla')).toBeVisible();
     })
