@@ -17,6 +17,5 @@ describe('Car Page', () => {
         expect(screen.getAllByText(/Make*/i)[0]).toBeVisible();
         expect(screen.getByRole('button', {name: 'Fetch Cars'})).toBeVisible();
         expect(screen.getByRole('button', {name: 'Add Car'})).toBeVisible();
-
     });
 });
