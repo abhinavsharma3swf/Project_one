@@ -1,5 +1,6 @@
 package com.bridge.example.projectone.controller;
 import com.bridge.example.projectone.entity.Car;
+import com.bridge.example.projectone.repository.CarRepository;
 import com.bridge.example.projectone.service.CarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.times;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CarController.class)
 public class CarControllerTest {
@@ -36,6 +37,8 @@ public class CarControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private CarRepository carRepository;
 
     @BeforeEach
     void setUp(){
@@ -68,4 +71,16 @@ public class CarControllerTest {
                 .andExpect(jsonPath("$.used").value(true));
     }
 
+    @Test
+    void shouldAcceptRequestToDeleteACar() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/car/1"))
+                .andExpect(status().is2xxSuccessful());
+        Mockito.verify(carService,times(1)).deleteCarById(1L);
+    }
+
+    @Test
+    void shouldAcceptRequestToEditTheCar() throws Exception {
+
+
+    }
 }

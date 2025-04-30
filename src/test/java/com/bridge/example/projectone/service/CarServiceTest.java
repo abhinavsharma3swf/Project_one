@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -58,5 +59,15 @@ public class CarServiceTest {
         verify(carRepository).deleteById(1L);
     }
 
-
+    @Test
+    void shouldAcceptRequestToEditTheCar() {
+        Car updateCar = new Car("VW", "GTI", 4, 5, true);
+        updateCar.setId(1L);
+        Mockito.when(carRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(carRepository.findById(1L)).thenReturn(Optional.of(car1));
+        Mockito.when(carRepository.save(any(Car.class))).thenReturn(updateCar);
+        Optional<Car> result = carService.updateCarItem(updateCar, 1L);
+        assertThat(result.get()).isEqualTo(updateCar);
+        verify(carRepository, times(1)).save(any(Car.class));
+    }
 }
