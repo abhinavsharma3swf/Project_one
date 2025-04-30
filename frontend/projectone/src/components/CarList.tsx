@@ -9,9 +9,8 @@ const CarList = ({cars}:props) => {
 
     const [localCar, setLocalCar] = useState(cars)
 
-    useEffect(() => {
-        setLocalCar(cars)
-    }, []);
+
+
     return (
         <div>
 

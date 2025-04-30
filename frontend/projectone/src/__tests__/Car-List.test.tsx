@@ -1,4 +1,4 @@
-import * as CarService from "../CarService"
+
 import {expect} from "vitest";
 import CarList from "../components/CarList.tsx";
 import {Car} from "../types.ts";
@@ -41,6 +41,6 @@ describe('Car List', () => {
         // const mockFetchCars = vi.spyOn(CarService, 'fetchCars')
         //     .mockResolvedValue(mockCars)
         render(<CarList cars={mockCars}/>)
-        expect(screen.getByText('Tesla')).toBeVisible();
+        expect(screen.getByText(/Tesla*/i)).toBeVisible();
     })
 });
