@@ -2,7 +2,7 @@ import CarList from "./CarList.tsx";
 import {Car} from "../types.ts";
 import {useEffect, useState} from "react";
 import CarIntake from "./CarIntake.tsx";
-import {fetchCars} from "../CarService.ts";
+import {addCar, fetchCars} from "../CarService.ts";
 
 const CarPage = () => {
 
@@ -16,9 +16,13 @@ const CarPage = () => {
     }, []);
 
     const handleAddCar = (newCar: Car) => {
-        setCarList(prevState => (
-            [...prevState, newCar]
-        ))
+        addCar(newCar).then((r) => { setCarList(prevState => (
+            [...prevState, r ]
+        ))});
+
+        // setCarList(prevState => (
+        //     [...prevState, ]
+        // ))
     }
 
     return (

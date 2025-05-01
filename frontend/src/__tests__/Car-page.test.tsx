@@ -25,9 +25,11 @@ describe('Car Page', () => {
 
 
 
-    it('should add a new car when form is submitted', async () => {
-       const car = { id: 5, make: 'Tess', model: '43', year: 2022, price: 2000, isUsed: true};
-        // vi.spyOn(CarService, 'fetchCars').mockResolvedValue([]);
+    it('should post a new car when form is submitted, and display', async () => {
+       const receiptCar1 = { id: 5, make: 'Tess', model: '43', year: 2022, price: 2000, isUsed: true};
+       const oldData = { id: null, make: 'Tess', model: '43', year: 2022, price: 2000, isUsed: true};
+        const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([]);
+        const mockAdd = vi.spyOn(CarService, 'addCar').mockResolvedValue(receiptCar1);
 
         render(<CarPage/>)
 
@@ -35,20 +37,24 @@ describe('Car Page', () => {
         const model = screen.getByPlaceholderText('Model');
         const year = screen.getByPlaceholderText('Year');
         const price = screen.getByPlaceholderText('Price');
-        const isUsed = car.isUsed ? screen.getAllByRole('radio')[1] : screen.getAllByRole('radio')[0];
+        const isUsed = receiptCar1.isUsed ? screen.getAllByRole('radio')[1] : screen.getAllByRole('radio')[0];
         const submit = screen.getByRole('button', { name: /submit/i });
 
 
-        await userEvent.type(make,car.make);
-        await userEvent.type(model,car.model);
-        await userEvent.type(year, car.year.toString());
-        await userEvent.type(price, car.price.toString());
+        await userEvent.type(make,receiptCar1.make);
+        await userEvent.type(model,receiptCar1.model);
+        await userEvent.type(year, receiptCar1.year.toString());
+        await userEvent.type(price, receiptCar1.price.toString());
         await userEvent.click(isUsed);
         await userEvent.click(submit);
 
         screen.logTestingPlaygroundURL();
-        expect (await screen.findByText('Make: ' + car.make)).toBeVisible();
-        expect (await screen.findByText("Model: " + car.model)).toBeVisible();
+
+        expect(mockAdd).toHaveBeenCalledExactlyOnceWith(oldData);
+        expect(mockFetch).toHaveBeenCalledOnce();
+        expect (await screen.findByText('Make: ' + receiptCar1.make)).toBeVisible();
+        expect (await screen.findByText("Model: " + receiptCar1.model)).toBeVisible();
+
     });
 
     it('should display list of fetch cars', async () => {
@@ -62,4 +68,5 @@ describe('Car Page', () => {
         expect(screen.getByRole('heading', { name: "Make: " + car2.make})).toBeVisible();
         expect(mockFetch).toHaveBeenCalledOnce()
     });
+
 });
