@@ -3,9 +3,10 @@ import {Car} from "../types.ts";
 import CarCard from "./CarCard.tsx";
 
 type props = {
-    cars: Car[];
+    cars: Car[],
+    onDelete:(id:number | null)=>void
 }
-const CarList = ({cars}:props) => {
+const CarList = ({cars, onDelete}:props) => {
 
     // @ts-ignore
     const [localCar, setLocalCar] = useState(cars)
@@ -15,6 +16,10 @@ const CarList = ({cars}:props) => {
     }, [cars]);
 
 
+    const handleDelete = (id:number | null) => {
+            onDelete(id);
+    };
+
     return (
         <div>
 
@@ -22,6 +27,7 @@ const CarList = ({cars}:props) => {
                 <CarCard
                 key={index}
                 car={element}
+                onDelete={handleDelete}
                 />
             ))}
         </div>
