@@ -37,8 +37,6 @@ public class CarControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private CarRepository carRepository;
 
     @BeforeEach
     void setUp(){
