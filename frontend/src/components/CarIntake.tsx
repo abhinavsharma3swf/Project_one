@@ -1,11 +1,12 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Car} from "../types.ts";
 
 type CarIntakeProp ={
-    onAddCar: (car: Car) => void;
+    onAddCar: (car: Car) => void,
+    editCar: Car
 }
 
-const CarIntake = ({onAddCar}: CarIntakeProp) => {
+const CarIntake = ({onAddCar, editCar}: CarIntakeProp) => {
 
     const [formData, setFormData] = useState({
         make: "",
@@ -15,6 +16,9 @@ const CarIntake = ({onAddCar}: CarIntakeProp) => {
         isUsed: true
     });
 
+    useEffect(() => {
+        editCar ? setFormData(editCar) : "";
+    }, []);
 
 
     const handleSubmit=(e: { preventDefault: () => void; })=>{
@@ -105,6 +109,7 @@ const CarIntake = ({onAddCar}: CarIntakeProp) => {
                     Used
                 </label>
                 <button type="submit"> Submit </button>
+                <button disabled={ !editCar }>{editCar ? "Edit: " + editCar.id : "Edit"} </button>
 
             </form>
 
