@@ -15,3 +15,9 @@ export const addCar:AddCar = (newCar:Car) => (
     axios.post('api/car', newCar)
         .then((r:AxiosResponse<Car>) => r.data)
 )
+
+type DeleteCar = (id:number) => Promise<void>;
+
+export const deleteCar:DeleteCar = (id:number) => (
+    axios.delete(`api/car/${id}`).then((r)=> r.data)
+)

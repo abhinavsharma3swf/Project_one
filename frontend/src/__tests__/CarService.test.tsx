@@ -3,7 +3,7 @@ import {setupServer} from "msw/node";
 import axios from "axios";
 import {http, HttpResponse} from "msw";
 import {Car} from "../types.ts";
-import {addCar, fetchCars} from "../CarService.ts";
+import {addCar, fetchCars, deleteCar} from "../CarService.ts";
 
 describe('Car Service', () => {
 
@@ -13,6 +13,15 @@ describe('Car Service', () => {
     beforeAll(() => server.listen({onUnhandledRequest: 'error'}))
     afterAll(() => server.close())
     afterEach(() => server.resetHandlers())
+
+
+    it('should send delete request', async () => {
+        server.use(http.delete('api/car/1', () =>
+            HttpResponse.json("",{status: 200})
+        ))
+
+        expect(await deleteCar(1)).toStrictEqual("");
+    });
 
     it('should post a new car', async () => {
         const car1:Car = {
