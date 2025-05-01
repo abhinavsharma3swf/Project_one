@@ -69,4 +69,23 @@ describe('Car Page', () => {
         expect(mockFetch).toHaveBeenCalledOnce()
     });
 
+    it('should send delete request and remove car', async () => {
+        const car = { id: 4, make: 'Kia', model: 'Forte', year: 2020, price: 5000, isUsed: false};
+        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, isUsed: true};
+        const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([car, car2]);
+        const mockDelete = vi.spyOn(CarService, 'deleteCar').mockResolvedValue()
+        await waitFor(() => render(<CarPage/>));
+
+        expect(mockFetch).toHaveBeenCalledOnce();
+        const car1Display = screen.getByRole('heading', { name: "Make: " + car.make})
+        expect(screen.getByRole('heading', { name: "Make: " + car2.make})).toBeVisible();
+
+        const deleteBtn = screen.getAllByRole('button', { name: /delete/i})[0]
+        const mockFetch2 = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([car2]);
+        await userEvent.click(deleteBtn)
+
+        expect(mockDelete).toHaveBeenCalledExactlyOnceWith(4)
+        expect(screen.queryByRole('heading', {name: "Make: " + car.make})).toBe(null);
+    });
+
 });
