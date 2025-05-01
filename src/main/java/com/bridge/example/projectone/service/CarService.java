@@ -34,6 +34,7 @@ public class CarService {
     public Optional<Car> updateCarItem(Car carWithNewValue, Long id){
         if(carRepository.existsById(id)){
             Car tempCar = carRepository.findById(id).orElse(null);
+            assert tempCar != null;
             tempCar.setMake(carWithNewValue.getMake());
             tempCar.setModel(carWithNewValue.getModel());
             tempCar.setPrice(carWithNewValue.getPrice());

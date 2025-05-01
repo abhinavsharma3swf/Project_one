@@ -80,7 +80,7 @@ public class CarControllerTest {
 
     @Test
     void shouldAcceptRequestToEditTheCar() throws Exception {
-
-
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/car/1"))
+                .andExpect(status().is2xxSuccessful());
     }
 }
