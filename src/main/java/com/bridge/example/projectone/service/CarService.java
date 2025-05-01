@@ -26,8 +26,6 @@ public class CarService {
     }
 
     public void deleteCarById(Long id) {
-//        if(!carRepository.existsById(id))
-//            throw new EntityNotFoundException("Car not found with this id: " + id);
         carRepository.deleteById(id);
     }
 
