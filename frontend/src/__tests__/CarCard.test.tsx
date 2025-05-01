@@ -15,7 +15,7 @@ describe('CardCard', () => {
             price: 40000,
             isUsed: true
         }
-        render(<CarCard car= {mockCar}/>)
+        render(<CarCard car= {mockCar} onDelete={()=>{}}/>)
         expect(screen.getByText(`Make: ${mockCar.make}`)).toBeVisible();
         expect(screen.getByText(`isUsed: ${mockCar.isUsed ? "Used" : "New"}`)).toBeVisible();
         expect(screen.getByRole('button', { name: /delete/i})).toBeVisible();
