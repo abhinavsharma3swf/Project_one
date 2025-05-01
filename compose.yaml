@@ -1,9 +1,17 @@
+version: "3.8"
 services:
-  postgres:
-    image: 'postgres:latest'
+  postgres-db:
+    container_name: car
+    image: postgres # use latest official postgres version
+    restart: always
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_USER: carentry
+      POSTGRES_PASSWORD: carentry1
+      POSTGRES_DB: carentry
+      POSTGRES_HOST_AUTH_METHOD: password
     ports:
-      - '5432'
+      - "5436:5432"
+
+volumes:
+  postgresql_data:
+    driver: local
