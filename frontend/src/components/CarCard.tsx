@@ -1,10 +1,17 @@
 import {Car} from "../types.ts";
 
 
+
+
 type CarCardProps = {
-    car: Car
+    car: Car,
+    onDelete: (id:number | null) => void
 }
-const CarCard = ({car}: CarCardProps ) => {
+const CarCard = ({car, onDelete}: CarCardProps ) => {
+    const handleDelete = () => {
+        onDelete(car.id)
+    }
+
     return (
         <div>
             <h1>Make: {car.make}</h1>
@@ -12,6 +19,7 @@ const CarCard = ({car}: CarCardProps ) => {
             <h2>Year: {car.year}</h2>
             <h2>Price: {car.price}</h2>
             <p>isUsed: {car.isUsed ? 'Used' : 'New'}</p>
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 };
