@@ -20,7 +20,7 @@ const CarIntake = ({onAddCar}: CarIntakeProp) => {
     const handleSubmit=(e: { preventDefault: () => void; })=>{
     e.preventDefault();
 
-    const newCar: Car ={
+    const newCar: Car = {
         id: null,
         make: formData.make,
         model: formData.model,
@@ -99,9 +99,10 @@ const CarIntake = ({onAddCar}: CarIntakeProp) => {
                        name='isUsed'
                        value='true'
                        id='used'
+                       defaultChecked={true}
                        aria-label='condition'/>
                 <label htmlFor='used'>
-                    USED
+                    Used
                 </label>
                 <button type="submit"> Submit </button>
 
