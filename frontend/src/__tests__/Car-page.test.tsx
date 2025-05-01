@@ -1,7 +1,8 @@
-import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import CarPage from "../components/CarPage.tsx";
-import {expect} from "vitest";
+import {expect, vi} from "vitest";
 import {userEvent} from "@testing-library/user-event";
+import * as CarService from '../CarService.ts'
 
 describe('Car Page', () => {
 
@@ -48,5 +49,17 @@ describe('Car Page', () => {
         screen.logTestingPlaygroundURL();
         expect (await screen.findByText('Make: ' + car.make)).toBeVisible();
         expect (await screen.findByText("Model: " + car.model)).toBeVisible();
+    });
+
+    it('should display list of fetch cars', async () => {
+        const car = { id: 5, make: 'Kia', model: 'Forte', year: 2020, price: 5000, isUsed: false};
+        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, isUsed: true};
+        const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([car, car2]);
+
+        await waitFor(() => render(<CarPage/>))
+
+        expect(screen.getByRole('heading', { name: "Make: " + car.make})).toBeVisible();
+        expect(screen.getByRole('heading', { name: "Make: " + car2.make})).toBeVisible();
+        expect(mockFetch).toHaveBeenCalledOnce()
     });
 });

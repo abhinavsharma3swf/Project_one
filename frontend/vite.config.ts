@@ -9,5 +9,19 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: 'src/setupTests.ts',
+  },
+
+  server: {
+    port:3000,
+    strictPort: true,
+    hmr:{
+      clientPort: 3000,
+    },
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+    }
   }
-})
+});
