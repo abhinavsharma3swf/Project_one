@@ -13,11 +13,11 @@ describe('CardCard', () => {
             model: "Model3",
             year: 2024,
             price: 40000,
-            isUsed: true
+            used: true
         }
         render(<CarCard car= {mockCar} onDelete={()=>{}}/>)
         expect(screen.getByText(`Make: ${mockCar.make}`)).toBeVisible();
-        expect(screen.getByText(`isUsed: ${mockCar.isUsed ? "Used" : "New"}`)).toBeVisible();
+        expect(screen.getByText(`isUsed: ${mockCar.used ? "Used" : "New"}`)).toBeVisible();
         expect(screen.getByRole('button', { name: /delete/i})).toBeVisible();
     });
 
@@ -28,7 +28,7 @@ describe('CardCard', () => {
             model: "Model3",
             year: 2024,
             price: 40000,
-            isUsed: true
+            used: true
         }
 
         const mockDelete = vi.fn()

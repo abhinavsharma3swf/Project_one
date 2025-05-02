@@ -26,8 +26,8 @@ describe('Car Page', () => {
 
 
     it('should post a new car when form is submitted, and display', async () => {
-       const receiptCar1 = { id: 5, make: 'Tess', model: '43', year: 2022, price: 2000, isUsed: true};
-       const oldData = { id: null, make: 'Tess', model: '43', year: 2022, price: 2000, isUsed: true};
+       const receiptCar1 = { id: 5, make: 'Tess', model: '43', year: 2022, price: 2000, used: true};
+       const oldData = { id: null, make: 'Tess', model: '43', year: 2022, price: 2000, used: true};
         const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([]);
         const mockAdd = vi.spyOn(CarService, 'addCar').mockResolvedValue(receiptCar1);
 
@@ -37,7 +37,7 @@ describe('Car Page', () => {
         const model = screen.getByPlaceholderText('Model');
         const year = screen.getByPlaceholderText('Year');
         const price = screen.getByPlaceholderText('Price');
-        const isUsed = receiptCar1.isUsed ? screen.getAllByRole('radio')[1] : screen.getAllByRole('radio')[0];
+        const isUsed = receiptCar1.used ? screen.getAllByRole('radio')[1] : screen.getAllByRole('radio')[0];
         const submit = screen.getByRole('button', { name: /submit/i });
 
 
@@ -58,8 +58,8 @@ describe('Car Page', () => {
     });
 
     it('should display list of fetch cars', async () => {
-        const car = { id: 5, make: 'Kia', model: 'Forte', year: 2020, price: 5000, isUsed: false};
-        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, isUsed: true};
+        const car = { id: 5, make: 'Kia', model: 'Forte', year: 2020, price: 5000, used: false};
+        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, used: true};
         const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([car, car2]);
 
         await waitFor(() => render(<CarPage/>))
@@ -70,8 +70,8 @@ describe('Car Page', () => {
     });
 
     it('should send delete request and remove car', async () => {
-        const car = { id: 4, make: 'Kia', model: 'Forte', year: 2020, price: 5000, isUsed: false};
-        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, isUsed: true};
+        const car = { id: 4, make: 'Kia', model: 'Forte', year: 2020, price: 5000, used: false};
+        const car2 = { id: 5, make: 'Tesla', model: '43', year: 2022, price: 2000, used: true};
         const mockFetch = vi.spyOn(CarService, 'fetchCars').mockResolvedValue([car, car2]);
         const mockDelete = vi.spyOn(CarService, 'deleteCar').mockResolvedValue()
         await waitFor(() => render(<CarPage/>));

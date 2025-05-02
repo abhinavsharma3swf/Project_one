@@ -20,7 +20,7 @@ describe('Car List', () => {
             model: "Model3",
             year: 2024,
             price: 40000,
-            isUsed: true
+            used: true
         }
 
         const mockDelete = vi.fn()
@@ -41,21 +41,21 @@ describe('Car List', () => {
                 model: "Model3",
                 year: 2024,
                 price: 40000,
-                isUsed: true },
+                used: true },
 
             {id: 2,
                 make: "Kia",
                 model: "Stinger",
                 year: 2018,
                 price: 150000,
-                isUsed: true },
+                used: true },
 
             {id: 3,
                 make: "BMW",
                 model: "X3",
                 year: 2021,
                 price: 50000,
-                isUsed: false }
+                used: false }
         ]
 
         // const mockFetchCars = vi.spyOn(CarService, 'fetchCars')

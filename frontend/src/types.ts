@@ -4,5 +4,5 @@ export type Car = {
     model: string,
     year: number,
     price: number,
-    isUsed: boolean
+    used: boolean
 }

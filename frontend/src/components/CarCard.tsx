@@ -18,7 +18,7 @@ const CarCard = ({car, onDelete}: CarCardProps ) => {
             <h2>Model: {car.model}</h2>
             <h2>Year: {car.year}</h2>
             <h2>Price: {car.price}</h2>
-            <p>isUsed: {car.isUsed ? 'Used' : 'New'}</p>
+            <p>isUsed: {car.used ? 'Used' : 'New'}</p>
             <button onClick={handleDelete}>Delete</button>
         </div>
     );

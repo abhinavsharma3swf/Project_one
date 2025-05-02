@@ -13,7 +13,7 @@ const CarIntake = ({onAddCar, editCar}: CarIntakeProp) => {
         model: "",
         year: 0,
         price: 0,
-        isUsed: true
+        used: true
     });
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const CarIntake = ({onAddCar, editCar}: CarIntakeProp) => {
         model: formData.model,
         year: formData.year,
         price: formData.price,
-        isUsed: formData.isUsed
+        used: formData.used
     }
 
     onAddCar(newCar);
@@ -46,7 +46,7 @@ const CarIntake = ({onAddCar, editCar}: CarIntakeProp) => {
             [name]:
                 type === "number"
                     ? Number(value)
-                    : name === "isUsed"
+                    : name === "used"
                         ? value === "true"  // convert string to boolean
                         : value,
         }));
@@ -92,19 +92,22 @@ const CarIntake = ({onAddCar, editCar}: CarIntakeProp) => {
 
                 <input type='radio'
                        id='new'
-                       name='isUsed'
-                       value='false'
-                        aria-label='condition'/>
+                       name='used'
+                       value={undefined}
+                        aria-label='condition'
+                onChange={handleInput}/>
                 <label htmlFor='new'>
                     New
                 </label>
 
                 <input type='radio'
-                       name='isUsed'
+                       name='used'
                        value='true'
                        id='used'
                        defaultChecked={true}
-                       aria-label='condition'/>
+                       aria-label='condition'
+                        onChange={handleInput}
+                />
                 <label htmlFor='used'>
                     Used
                 </label>

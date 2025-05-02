@@ -30,7 +30,7 @@ describe('Car Service', () => {
             model: "Model3",
             year: 2024,
             price: 40000,
-            isUsed: true
+            used: true
         }
 
         const carReciept:Car = {
@@ -39,7 +39,7 @@ describe('Car Service', () => {
             model: "Model3",
             year: 2024,
             price: 40000,
-            isUsed: true
+            used: true
         }
 
         server.use(http.post('api/car', () =>
@@ -59,7 +59,7 @@ describe('Car Service', () => {
                 model: "Model3",
                 year: 2024,
                 price: 40000,
-                isUsed: true
+                used: true
             },
 
             {
@@ -68,7 +68,7 @@ describe('Car Service', () => {
                 model: "Stinger",
                 year: 2018,
                 price: 150000,
-                isUsed: true
+                used: true
             },
 
             {
@@ -77,7 +77,7 @@ describe('Car Service', () => {
                 model: "X3",
                 year: 2021,
                 price: 50000,
-                isUsed: false
+                used: false
             }
         ];
 
